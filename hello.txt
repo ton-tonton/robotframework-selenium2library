@@ -1,0 +1,17 @@
+*** Settings ***
+Library		Selenium2Library
+
+
+*** Variables ***
+
+
+*** Testcases ***
+Search Data From Google.com
+	Open Browser	http://www.google.com
+	Input Text		id=lst-ib	astraea
+	Submit Form
+	Wait Until Page Contains	astraea
+	Close Browser
+
+
+*** Keywords ***
