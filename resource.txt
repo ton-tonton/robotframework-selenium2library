@@ -1,0 +1,35 @@
+*** Settings ***
+Library		Selenium2Library
+
+*** Variables ***
+${LOGIN_URL}	http://localhost:7272/html
+${WELCOME_URL}	${LOGIN_URL}/welcome.html
+${ERROR_URL}	${LOGIN_URL}/error.html
+
+*** Keywords ***
+Open the login page
+	Open Browser	${LOGIN_URL}
+
+Go to login page
+	Go To		${LOGIN_URL}
+
+Fill in username
+	[Arguments]		${username}
+	Input Text		name=username_field		${username}
+
+Fill in password
+	[Arguments]		${password}
+	Input Text		name=password_field		${password}
+
+Submit data to system
+	Click Button	name=login_button
+
+Welcome page should be open
+	Location Should Be		${WELCOME_URL}
+	Title Should Be			Welcome Page
+	Page Should Contain		Login succeeded
+
+Login should have failed
+	Location Should Be		${ERROR_URL}
+	Title Should Be			Error Page
+	Page Should Contain		Login failed
